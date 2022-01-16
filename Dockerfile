@@ -13,6 +13,8 @@ RUN apt update \
         net-tools \
         curl \
         unzip \
+        gnupg2 \
+        lsb-release \
         git \
         wget \
         curl \
@@ -27,6 +29,7 @@ RUN apt update \
         php7.4-readline \
         php7.4-xml \
         php7.4-zip \
+    && apt install nginx \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* \
     && mkdir -p /usr/src/website \
@@ -50,7 +53,7 @@ COPY overrides.conf /etc/php/7.4/fpm/pool.d/z-overrides.conf
 
 CMD ["/usr/sbin/php-fpm7.4", "-O" ]
 
-EXPOSE 9000
+EXPOSE 9000 80 443
 
 FROM cli AS swoole
 
