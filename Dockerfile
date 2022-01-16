@@ -6,8 +6,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update \
     && apt -y upgrade \
-    && apt-get install -y --no-install-recommends gnupg \
-    && apt-get -y --no-install-recommends install \
+    && apt install -y --no-install-recommends gnupg \
+    && apt -y --no-install-recommends install \
         ca-certificates \
         bash \
         net-tools \
@@ -27,7 +27,7 @@ RUN apt update \
         php7.4-readline \
         php7.4-xml \
         php7.4-zip \
-    && apt-get clean \
+    && apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* \
     && mkdir -p /usr/src/website \
     && cd /usr/src/website \
@@ -40,8 +40,8 @@ CMD ["php", "-a"]
 FROM cli AS fpm
 
 RUN apt-get update \
-    && apt-get -y --no-install-recommends install php7.4-fpm \
-    && apt-get clean \
+    && apt -y --no-install-recommends install php7.4-fpm \
+    && apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 STOPSIGNAL SIGQUIT
